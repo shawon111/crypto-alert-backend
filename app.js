@@ -33,8 +33,12 @@ app.use(cors(corsOptions));
 // routes
 const cryptoRoute = require('./src/routers/crypto.router');
 const { checkAlerts } = require('./src/services/checkAlert.service');
+const startCron = require('./src/utils/cron');
 
 app.use('/api/crypto', cryptoRoute)
+
+// cron job
+startCron();
 
 app.get('/', (req, res) => {
     res.status(200).json({
@@ -45,24 +49,6 @@ app.get('/', (req, res) => {
     })
 })
 
-// cron endpoint
-app.get("/api/cron", async (req, res) => {
-  try {
-    await checkAlerts();
-
-    return res.status(200).json({
-      success: true,
-      message: "Cron executed successfully",
-    });
-  } catch (err) {
-    console.error("Cron error:", err);
-
-    return res.status(500).json({
-      success: false,
-      error: err.message,
-    });
-  }
-});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
