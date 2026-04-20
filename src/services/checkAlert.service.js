@@ -1,3 +1,4 @@
+const config = require("../configs/config");
 const canSendAlert = require("../utils/alertState");
 const { fetchCryptoData } = require("./crypto.service");
 const sendEmail = require("./email.service");
