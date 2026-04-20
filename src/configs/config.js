@@ -1,5 +1,5 @@
 const config = {
-  threshold: 2, // % change alert
+  threshold: 1, // % change alert
   coins: ["bitcoin", "ethereum", "solana"],
 
   cooldownMinutes: 30, // prevent spam alerts
