@@ -15,6 +15,10 @@ async function fetchCryptoData(coinIds = []) {
 
   const res = await fetch(url);
   const data = await res.json();
+  console.log("COINGECKO RESPONSE:", data)
+  if (!Array.isArray(data)) {
+    throw new Error("CoinGecko returned non-array response");
+  }
   return data.map((coin) => ({
     coinName: coin.name,
     symbol: coin.symbol.toUpperCase(),
